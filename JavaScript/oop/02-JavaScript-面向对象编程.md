@@ -80,3 +80,14 @@ var cat2 = new Cat('二毛', '黑色')
 alert(cat1.constructor === Cat); // true
 alert(cat2.constructor === Cat); // true
 ```
+
+JavaScript 还提供了一个 `instanceof` 运算符，用来验证原型对象和实例对象的关系。
+
+```js
+alert(cat1 instanceof Cat); // true
+alert(cat2 instanceof Cat); // true
+```
+
+## 4 构造函数模式的问题
+
+构造函数方法很好用，但是存在一个内存浪费的问题。
