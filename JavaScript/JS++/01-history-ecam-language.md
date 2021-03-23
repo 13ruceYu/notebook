@@ -59,6 +59,8 @@ European Computer Manufactures Association，欧洲计算机制造联合会，�
 
 尽管JavaScript和JScript与ECMAScript兼容，但包含超出ECMAScript的功能。
 
+yo
+
 ## Reference
 
 <https://www.w3.org/community/webed/wiki/Zh-cn/Web%E7%9A%84%E5%8E%86%E5%8F%B2>
