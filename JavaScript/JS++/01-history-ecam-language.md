@@ -51,7 +51,7 @@ Gopher是由明尼苏达大学创建的。1993年2月，明尼苏达大学宣布
 
 2009 年，甲骨文（oracle）收购了 Sun 公司，此时，JavaScript 和 Java 的版权同属于甲骨文公司。
 
-## 3、ECAM
+## 3、ECMA
 
 European Computer Manufactures Association，欧洲计算机制造联合会，是一家国际性会员制度的信息和标准组织。
 
