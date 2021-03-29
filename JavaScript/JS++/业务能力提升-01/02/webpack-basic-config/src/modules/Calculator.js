@@ -15,18 +15,70 @@ export default class Calculator {
     this.inputGroupComponent = new InputGroupComponent()
     this.btnGroupComponent = new BtnGroupComponent();
 
-    this.data = {
-      method: 'plus',
-      fVal: 0,
-      sVal: 0
-    };
+    this.data = this.defineData();
 
-    this.selectedIndex = 0; 
+    this.selectedIndex = 0;
   }
 
   init () {
     this.render()
     this.bindEvent()
+  }
+
+  defineData () {
+    let target = {
+      method: 'plus',
+      fVal: 0,
+      sVal: 0
+    }
+
+    const _self = this;
+
+    return new Proxy(target, {
+      get(target, prop) {
+        return target[prop];
+      },
+      set(target, prop, value) {
+        target[prop] = value;
+        _self.setResult(_self.data.method, _self.data.fVal, _self.data.sVal); 
+        return true;
+      }
+    })
+    // let _obj = {},
+    //     method = 'plus',
+    //     fVal = 0,
+    //     sVal = 0;
+    // const _self = this;
+    // Object.defineProperties(_obj, {
+    //   method: {
+    //     get() {
+    //       return method;
+    //     },
+    //     set(newVal) {
+    //       method = newVal;
+    //       _self.setResult(_self.data.method, _self.data.fVal, _self.data.sVal); 
+    //     }
+    //   },
+    //   fVal: {
+    //     get() {
+    //       return fVal;
+    //     },
+    //     set(newVal) {
+    //       fVal = newVal;
+    //       _self.setResult(_self.data.method, _self.data.fVal, _self.data.sVal); 
+    //     }
+    //   },
+    //   sVal: {
+    //     get() {
+    //       return sVal;
+    //     },
+    //     set(newVal) {
+    //       sVal = newVal;
+    //       _self.setResult(_self.data.method, _self.data.fVal, _self.data.sVal); 
+    //     }
+    //   }
+    // });
+    // return _obj;
   }
 
   render () {
@@ -58,11 +110,8 @@ export default class Calculator {
 
     if (tagName === 'button') {
       const method = tar.getAttribute('data-method');
-    //     fVal = digitalize(trimSpace(this.oInputs[0].value)) || 0,
-    //     sVal = digitalize(trimSpace(this.oInputs[1].value)) || 0;
-      this.setMethod(method);
-      this.setBtnSelected(tar)
-    //   this.setResult(method, fVal, sVal)
+      this.setData('method', method);
+      this.setBtnSelected(tar);
     }
   }
 
@@ -72,8 +121,14 @@ export default class Calculator {
       id = tar.getAttribute('data-id'),
       val = digitalize(trimSpace(tar.value)) || 0;
 
+      this.setData(id, val);
+  }
 
-    switch (id) {
+  setData(field, val) {
+    switch (field) {
+      case 'method':
+        this.data.method = val;
+        break;
       case 'fVal':
         this.data.fVal = val;
         break;
@@ -83,12 +138,6 @@ export default class Calculator {
       default:
         break;
     }
-    this.setResult(this.data.method, this.data.fVal, this.data.sVal)
-  }
-
-  setMethod(method) {
-    this.data.method = method;
-    this.setResult(this.data.method, this.data.fVal, this.data.sVal);
   }
 
   setBtnSelected(tar) {
